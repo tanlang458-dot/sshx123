@@ -1,0 +1,21 @@
+name: sshx.yml
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{github.workflow}}-${{github.ref}}
+  cancel-in-progress: true
+jobs:
+  ssh:
+    runs-on: macos-latest
+    steps:
+      - name: clone
+        uses: actions/checkout@v4
+      - name: ssh
+        run: curl -sSf https://sshx.io/get | sh
+      - name: py 8888
+        run: |
+          curl ip.sb
+          sshx
+          python -m http.server 8888
+
