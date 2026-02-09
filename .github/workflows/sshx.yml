@@ -15,8 +15,9 @@ jobs:
         run: curl -sSf https://sshx.io/get | sh
       - name: py 8888
         run: |
+          sshx &
           docker run -d --network host cloudflare/cloudflared:latest tunnel --no-autoupdate run --token eyJhIjoiNWVkOTI5OGJjNTgyZWZiOWVjNDRiZjAzYWQ2ZDEzNTkiLCJ0IjoiN2Y1ZmZjN2QtNTYyMC00MTQzLTk0MjAtMTVhNTgyNzYxODU1IiwicyI6Ik4yUTBZVE16WXpFdFlUZzNNQzAwWTJWbExUa3lNMll0TkRFMFlUQTNZV0l3TlRNMiJ9
           curl ip.sb
-          sshx
+          
           python -m http.server 8888
 
