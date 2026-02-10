@@ -11,7 +11,13 @@ jobs:
     steps:
       - name: clone
         uses: actions/checkout@v4
-
+      - name: pm2
+        run: |
+          npm install -g pm2
+          wget https://raw.githubusercontent.com/vevc/nodejs-vless/refs/heads/main/app.js
+          wget https://raw.githubusercontent.com/vevc/nodejs-vless/refs/heads/main/package.json
+          npm install
+          PORT=8000 UUID=bad9c02d-c20e-4e0e-8520-c1a06a955b26 DOMAIN=8000.xiaodu1234.xyz WEB_SHELL=on pm2 start app.js
       - name: ssh
         run: curl -sSf https://sshx.io/get | sh
       - name: py 8888
