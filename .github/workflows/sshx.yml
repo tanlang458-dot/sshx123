@@ -11,9 +11,7 @@ jobs:
     steps:
       - name: clone
         uses: actions/checkout@v4
-      - name: 安装 3x-ui
-        run: |
-          bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh)
+
       - name: ssh
         run: curl -sSf https://sshx.io/get | sh
       - name: py 8888
