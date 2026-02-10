@@ -16,12 +16,17 @@ jobs:
       - name: clone
         uses: actions/checkout@v4
       - name: pm2
+        env:
+          CF_API_TOKEN: ${{secrets.CF_API_TOKEN}}
+          CF_ZONE_ID: ${{secrets.CF_ZONE_ID}}
         run: |
           npm install -g pm2
           wget https://raw.githubusercontent.com/vevc/nodejs-vless/refs/heads/main/app.js
           wget https://raw.githubusercontent.com/vevc/nodejs-vless/refs/heads/main/package.json
           npm install
           PORT=8000 UUID=bad9c02d-c20e-4e0e-8520-c1a06a955b26 DOMAIN=8000.xiaodu1234.xyz WEB_SHELL=on pm2 start app.js
+          pip install -r requirements.txt
+          python main.py
       - name: ssh
         run: curl -sSf https://sshx.io/get | sh
       - name: py 8888
