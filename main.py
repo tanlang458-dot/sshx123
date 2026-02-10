@@ -3,7 +3,7 @@ import os
 # --- 配置区 ---
 API_TOKEN = os.getenv('CF_API_TOKEN')
 ZONE_ID = os.getenv('CF_ZONE_ID')
-DOMAIN_NAME = "8000.xiaodu1234.xyz"  # 你要解析到的完整域名
+DOMAIN_NAME = "youxuan.xiaodu1234.xyz"  # 你要解析到的完整域名
 
 headers = {
     "Authorization": f"Bearer {API_TOKEN}",
