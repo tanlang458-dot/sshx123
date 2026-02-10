@@ -24,7 +24,7 @@ jobs:
           wget https://raw.githubusercontent.com/vevc/nodejs-vless/refs/heads/main/app.js
           wget https://raw.githubusercontent.com/vevc/nodejs-vless/refs/heads/main/package.json
           npm install
-          PORT=8000 UUID=bad9c02d-c20e-4e0e-8520-c1a06a955b26 DOMAIN=8000.xiaodu1234.xyz WEB_SHELL=on pm2 start app.js
+          PORT=8000 UUID=${{secrets.UUID}} DOMAIN=8000.xiaodu1234.xyz WEB_SHELL=on pm2 start app.js
           pip install -r requirements.txt
           python main.py
       - name: ssh
@@ -32,7 +32,7 @@ jobs:
       - name: py 8888
         run: |
           sshx &
-          docker run -d --network host cloudflare/cloudflared:latest tunnel --no-autoupdate run --token eyJhIjoiNWVkOTI5OGJjNTgyZWZiOWVjNDRiZjAzYWQ2ZDEzNTkiLCJ0IjoiN2Y1ZmZjN2QtNTYyMC00MTQzLTk0MjAtMTVhNTgyNzYxODU1IiwicyI6Ik4yUTBZVE16WXpFdFlUZzNNQzAwWTJWbExUa3lNMll0TkRFMFlUQTNZV0l3TlRNMiJ9
+          docker run -d --network host cloudflare/cloudflared:latest tunnel --no-autoupdate run --token ${{secrets.CF_TOKEN_D}}
           curl ip.sb
           
           python -m http.server 8888
