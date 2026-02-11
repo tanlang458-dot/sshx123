@@ -45,8 +45,7 @@ def add_record(ip):
         print(f"❌ 解析失败 {ip}: {res.get('errors')}")
 
 
-# --- 执行流程 ---
-if __name__ == "__main__":
+def record():
     print(f"开始处理域名: {DOMAIN_NAME}")
 
     data = {
@@ -54,10 +53,16 @@ if __name__ == "__main__":
     }
     res = requests.post('https://api.hostmonit.com/get_optimization_ip', headers=headers1, json=data).json()
     ips = []
-    for ip in  res.get('info'):
+    for ip in res.get('info'):
         ips.append(ip.get('ip'))
 
     print('优选ips', ips)
+
+    if len(ips) == 0:
+        return
+
+    ips = ips[:2]
+    ips.append('162.159.129.53')
 
     # 1. 清理旧记录（防止记录堆积）
     old_ids = get_existing_records()
@@ -68,3 +73,7 @@ if __name__ == "__main__":
     # 2. 批量添加新记录
     for ip in ips:
         add_record(ip)
+
+# --- 执行流程 ---
+if __name__ == "__main__":
+    record()
